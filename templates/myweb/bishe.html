@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bishe.css">
+	<script>
+        window.onload = function () {
+            var ul1 = document.getElementById('ul1').getElementsByTagName('li');
+            var ul2 = document.getElementById('ul2').getElementsByTagName('li');
+            for (var i = 0; i < ul1.length; i++) {
+                ul1[i].mod = i;
+                ul1[i].onclick = function () {
+	                document.getElementById("title").innerText=ul1[this.mod].innerText;
+                    console.log(this.mod);
+                    //ul1[this.mod].style.color='white';
+                    for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                    }
+                    ul2[this.mod].style.display = 'block';
+                    for (var j = 0; j < ul1.length; j++) {
+                        ul1[j].style.color='grey'
+                    }
+                    ul1[this.mod].style.color= 'white'
+                }
+            }
+            main2_1.onclick = function () {
+                    // console.log(999);
+                    for (var j = 0; j < ul2.length; j++) {
+                    	if(ul2[j].style.display=='block'){
+                    		mod2 = j;
+                    		console.log(mod2);
+                    		break;
+                    	}
+                    }
+                    for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                    }
+                    mod2=mod2+1
+                    ul2[mod2].style.display = 'block';
+                    document.getElementById("title").innerText=ul1[mod2].innerText;
+                    
+                }
+        }
+    </script>
+</head>
+<body>
+    <div id="top">
+    	<h1 id="title">模块一</h1>
+    </div>
+    <div id="main">
+        <div id="main1">
+        <ul id="ul2">
+            <li style="display:block">
+            <p>
+            准备好python可以运行的环境
+            法一：
+            直接下载Python软件https://www.python.org/downloads/
+            法二：
+            下载Python编辑器Pycharmhttps://www.jetbrains.com/pycharm/download/#section=windows
+            </p>
+
+            </li>
+            <li style="display:none">
+            	运行下载的文件，即可获得https://movie.douban.com/top250
+            	此网站中关于“豆瓣电影Top250”的相关数据，并以txt文件格式进行保存。
+            </li>
+            <li style="display:none">
+            import requests<br/>
+            import re<br/>
+            import json<br/>
+            <hr/>
+            </li>
+            <li style="display:none">
+            def main(page):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;url = 'http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-' + str(page)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;html = request_dandan(url)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;items = parse_result(html) # 解析过滤我们想要的信息<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for item in items:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write_item_to_file(item)<br/>
+            <hr/>
+            </li>
+            <li style="display:none">
+            def request_dandan(url):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;try:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = requests.get(url)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if response.status_code == 200:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.text<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;except requests.RequestException:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br/>
+            <hr/>
+            </li>
+            <li style="display:none">
+            def parse_result(html):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;pattern = re.compile(<xmp>'<li>.*?list_num.*?(\d+).</div>.*?<img src="(.*?)".*?class="name".*?title="(.*?)">.*?class="star">.*?class="tuijian">(.*?)</span>.*?class="publisher_info">.*?target="_blank">(.*?)</a>.*?class="biaosheng">.*?<span>(.*?)</span></div>.*?<p><span\sclass="price_n">&yen;(.*?)</span>.*?</li>'</xmp>,re.S)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;items = re.findall(pattern,html)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for item in items:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield {<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'range': item[0],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'image': item[1],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'title': item[2],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'recommend': item[3],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'author': item[4],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'times': item[5],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'price': item[6]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+            <hr/>
+            </li>
+            <li style="display:none">
+            def write_item_to_file(item):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;print('开始写入数据 ====> ' + str(item))<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;with open('book.txt', 'a', encoding='UTF-8') as f:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.write(json.dumps(item, ensure_ascii=False) + '\n')<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.close()<br/>
+            <hr/>
+            </li>
+            <li style="display:none">
+            if __name__ == "__main__":<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for i in range(1,26):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main(i)<br/>
+            <hr/>
+            </li>
+        </ul>
+        </div>
+        <div id="main2">
+        	<input id="main2_1" type="submit" value="继续 Enter">
+        </div>
+
+    </div>
+	<div id="right">
+		<ul id="ul1">
+           <!-- <li><h3>示例</h3></li> -->
+           <h3>示例</h3>
+           <li><h4>环境准备</h4></li>
+           <li><h4>文件下载</h4></li>
+           <!-- <li><h3>代码详解</h3></li> -->
+           <h3>代码详解</h3>
+           <li><h4>1、</h4></li>
+           <li><h4>2、</h4></li>
+           <li><h4>3、</h4></li>
+           <li><h4>4、</h4></li>
+           <li><h4>5、</h4></li>
+           <li><h4>6、</h4></li>
+           <li><h4>7、</h4></li>
+       </ul>
+	</div>
+	
+</body>
+</html>
+

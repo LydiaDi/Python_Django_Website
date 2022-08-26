@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/login.css'%}">
+</head>
+<body>
+	<div id="main">
+	    <div id="top">登录</div>
+
+         <div id="middle">
+		 <form action="" method="post">
+		 	<input id="username" name="username" type="text" placeholder="用户名">
+		 	<input id="username" name="username" type="password" placeholder="密码">
+		 	<button type="submit" id="btnLogin">登录</button>
+		 </form>
+		 </div>
+         
+         <div id="bottom">
+		 <a>新用户注册</a>
+         </div>
+	</div>
+</body>
+</html>

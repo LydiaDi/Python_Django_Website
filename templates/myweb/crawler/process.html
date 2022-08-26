@@ -1,0 +1,344 @@
+{% extends "myweb/base.html" %}
+{% load static %}
+{% block addScripts %}
+<script>
+    window.onload = function () {
+            var btn1 = document.getElementById('btn1');
+            var btn2 = document.getElementById('btn2');
+
+            btn1.onclick = function () {
+                btn2.style.display='block';
+            }
+    }
+
+function Dictionary(){
+	this.add = add;
+    this.datastore = new Object();
+    this.showAll = showAll;
+}
+function showAll(){
+    for (var key in this.datastore) {
+        document.write(key + ':' + this.datastore[key]);
+        document.write('<br>');
+    }
+}
+function add(key, value){
+    this.datastore[key] = value;
+}
+
+//数组末尾添加元素
+function append(arr, item) {
+    var a = arr.slice(0);
+    a.push(item);
+    return a;
+}
+//将字符转换成Html
+function encodeHtml(str){
+    var encodedStr = "" ;
+    if (str=="") return encodedStr ;
+    else {
+        for (var i = 0 ; i < str.length ; i ++){
+            encodedStr += "&#" + str.substring(i, i + 1).charCodeAt().toString(10) + ";" ;
+        }
+    }
+    return encodedStr ;
+}
+//找出表单
+function eachTableRow2(){
+    var record = [];
+    var mydata2 = new Dictionary();
+
+    var resultOne2= document.getElementById("resultOne2");
+
+    var temp1=resultOne2.innerText.indexOf("<body>");
+    resultOne2=resultOne2.innerText.substring(temp1+6);
+    //console.log(resultOne2);
+
+    var resultOne= document.getElementById("resultOne");
+    resultOne.innerHTML=resultOne2;
+    //console.log(resultTwo.getElementsByTagName('ul'));
+    //var resultOne= resultOne2.innerText.getElementById("resultOne");
+    var ul1 = resultOne.getElementsByTagName('ul');
+
+    var len1=ul1.length;
+    for(var j = 0; j < len1; j++){
+
+        var ul2=ul1[j].getElementsByTagName('li');
+        //console.log(ul2[0]);
+        var len2=ul2.length;
+        //console.log(len);
+
+        if(len2!=0){
+
+            record=append(record,j);
+            var mydata = [];
+            for (var i = 0; i < len2; i++) {
+                var temp=ul2[i].innerHTML;
+                mydata=append(mydata,temp);
+            }
+            mydata2.add(j,mydata);
+        }
+    }
+
+    console.log(record);
+    //mydata2.showAll();
+
+    var mydata3 = new Dictionary();
+    var ul1A = resultOne.getElementsByTagName('ul');
+
+    var recordLen=record.length;
+    var max1=0;
+    var max2=0;
+    //注意索引之间的套娃转换
+    for(var k=0;k<recordLen;k++){
+        var k2=record[k];
+        var recordLen2=ul1A[k2].innerHTML.length;
+        if(recordLen2>max1){
+            max1=recordLen2;
+            max2=k;
+        }
+    }
+    var record1=record[max2];//找出包含字符最多的record的索引所对应的ul索引
+    //console.log(ul1A[record1].innerText.length);
+    console.log(max2);
+    localStorage.setItem("key", max2);
+
+    var ul2A=ul1A[record1].getElementsByTagName('li');
+    var len2A=ul2A.length;
+
+    if(len2A!=0){
+        for(var j = 0; j < len2A; j++){
+
+            var mydata4 = [];
+            var checkA=ul2A[j].getElementsByTagName('div');
+            var len3A=checkA.length;
+            if(len3A!=0){
+                for (var i = 0; i < len3A; i++) {
+                var tempA=checkA[i].innerText;
+                mydata4=append(mydata4,tempA);
+                }
+
+                mydata3.add(j,mydata4);
+            }
+            else{
+                var checkA=ul2A[j].getElementsByTagName('a');
+                var len3A=checkA.length;
+
+                for (var i = 0; i < len3A; i++) {
+                var tempA=checkA[i].innerText;
+                mydata4=append(mydata4,tempA);
+                }
+
+                mydata3.add(j,mydata4);
+            }
+
+        }
+    }
+
+    var i=0;
+    var bg = "#cccccc";
+    var color = null;
+
+    var exportOne = document.getElementById('exportOne');
+    exportOne.style.display='block';
+
+    var aOne = document.getElementById('aOne');
+    aOne.innerHTML='<input type="button" value="下一个" onclick="eachTableRow3()" style="font-size:18px;width: 90px;height: 31px;"/>';
+
+    var table_dom = document.getElementById("table2");
+    var resArr = [];
+    table_dom.innerHTML = resArr.join("");
+    for (var key in mydata3.datastore) {
+        resArr.push('<tr>');
+        var length=mydata3.datastore[key].length;
+        //console.log(length);
+        for(var i = 0; i < length; i++){
+            resArr.push('<td>');
+            resArr.push(mydata3.datastore[key][i]);
+            resArr.push('</td>');
+        }
+        resArr.push('</tr>');
+    }
+
+    table_dom.innerHTML = resArr.join("");
+
+    resultOne.innerHTML=""; //将网页内容清空，防止对本平台的样式造成影响
+}
+function eachTableRow3(){
+    var record = [];
+    var mydata2 = new Dictionary();
+
+    var resultOne2= document.getElementById("resultOne2");
+    var temp1=resultOne2.innerText.indexOf("<body>");
+    resultOne2=resultOne2.innerText.substring(temp1+6);
+    var resultOne= document.getElementById("resultOne");
+    resultOne.innerHTML=resultOne2;
+
+    var ul1 = resultOne.getElementsByTagName('ul');
+
+    var len1=ul1.length;
+    for(var j = 0; j < len1; j++){
+
+        var ul2=ul1[j].getElementsByTagName('li');
+        //console.log(ul2[0]);
+        var len2=ul2.length;
+        //console.log(len);
+
+        if(len2!=0){
+
+            record=append(record,j);
+            var mydata = [];
+            for (var i = 0; i < len2; i++) {
+                var temp=ul2[i].innerHTML;
+                mydata=append(mydata,temp);
+            }
+            mydata2.add(j,mydata);
+        }
+    }
+
+    console.log(record);
+    //mydata2.showAll();
+
+    var mydata3 = new Dictionary();
+    var ul1A = resultOne.getElementsByTagName('ul');
+
+    var recordLen=record.length;
+    var max1=0;
+    var max2=0;
+    var suoyin = localStorage.getItem("key");
+    suoyin=parseInt(suoyin);
+    suoyin=suoyin+1;
+    if(suoyin<recordLen){
+
+    }
+    else{
+        suoyin=0;
+    }
+    console.log(suoyin);
+    localStorage.setItem("key", suoyin);
+    var record1=record[suoyin];//找出包含字符最多的record的索引所对应的ul索引
+    //console.log(ul1A[record1].innerText.length);
+    //console.log(max2);
+
+    var ul2A=ul1A[record1].getElementsByTagName('li');
+    var len2A=ul2A.length;
+
+    if(len2A!=0){
+        for(var j = 0; j < len2A; j++){
+
+
+            var mydata4 = [];
+            var checkA=ul2A[j].getElementsByTagName('div');
+            var len3A=checkA.length;
+            if(len3A!=0){
+                for (var i = 0; i < len3A; i++) {
+                var tempA=checkA[i].innerText;
+                mydata4=append(mydata4,tempA);
+                }
+
+                mydata3.add(j,mydata4);
+            }
+            else{
+                var checkA=ul2A[j].getElementsByTagName('a');
+                var len3A=checkA.length;
+
+                for (var i = 0; i < len3A; i++) {
+                var tempA=checkA[i].innerText;
+                mydata4=append(mydata4,tempA);
+                }
+
+                mydata3.add(j,mydata4);
+            }
+
+        }
+    }
+
+    var i=0;
+    var bg = "#cccccc";
+    var color = null;
+
+    var exportOne = document.getElementById('exportOne');
+    exportOne.style.display='block';
+
+    var aOne = document.getElementById('aOne');
+    aOne.innerHTML='<input type="button" value="下一个" onclick="eachTableRow3()" style="width: 90px;height: 31px;font-size:18px;"/>';
+
+    var table_dom = document.getElementById("table2");
+    var resArr = [];
+    table_dom.innerHTML = resArr.join("");
+    for (var key in mydata3.datastore) {
+        resArr.push('<tr>');
+        var length=mydata3.datastore[key].length;
+        //console.log(length);
+        for(var i = 0; i < length; i++){
+            resArr.push('<td>');
+            resArr.push(mydata3.datastore[key][i]);
+            resArr.push('</td>');
+        }
+        resArr.push('</tr>');
+    }
+
+    table_dom.innerHTML = resArr.join("");
+
+    resultOne.innerHTML=""; //将网页内容清空，防止对本平台的样式造成影响
+}
+</script>
+
+
+{% endblock %}
+
+
+{% block addForm %}
+    <center>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </center>
+
+
+                输入网址后，按顺序点击“运行”、“解析列表”按钮！<br/><br/>
+                <form action="{% url 'web_carwler_1' %}" method="post" style="float:left;">
+                {% csrf_token %}
+                {#            这个属性是可以写到input标签中的        value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-1"#}
+                <input name="href" type="text" placeholder="输入网址" style="width: 500px;height: 35px;" >
+                <button id="btn1" type="submit"  style="width: 70px;height: 25px;">运行</button></form>
+                    <div id="btn2" style="display:block"><button type="submit"  style="float:left;margin-top: 5px;margin-left:5px;width: 90px;height: 25px;" onclick="eachTableRow2()">解析列表</button></div>
+                <br/>
+     <br/>运行结果：
+    <div id="exportOne" style="display:none;">
+        <a data-type="xls" href="javascript:;" style="color: rgb(14,109,253);">导出excel</a>&nbsp;&nbsp;&nbsp;
+    <a data-type="csv" href="javascript:;" style="color: rgb(14,109,253);">导出csv</a>&nbsp;&nbsp;&nbsp;
+    <a data-type="doc" href="javascript:;" style="color: rgb(14,109,253);">导出word</a>&nbsp;&nbsp;&nbsp;
+    <a data-type="txt" href="javascript:;" style="color: rgb(14,109,253);">导出txt</a>&nbsp;&nbsp;&nbsp;
+    <a data-type="json" href="javascript:;" style="color: rgb(14,109,253);">导出json</a>
+
+    </div><br/>
+<div id="aOne">
+</div>
+<table id="table1" border="1" align="center">
+    <tbody id="table2">
+
+    </tbody>
+</table>
+<div id="aTwo">
+</div>
+<script src="{% static 'myweb/js/Blob.js'%}"></script>
+<script src="{% static 'myweb/js/FileSaver.js'%}"></script>
+<script src="{% static 'myweb/js/tableExport.js'%}"></script>
+<script>
+var $exportLink = document.getElementById('exportOne');
+
+$exportLink.addEventListener('click', function(e){
+
+    e.preventDefault();
+
+    if(e.target.nodeName === "A"){
+
+        tableExport('table1', '测试测试', e.target.getAttribute('data-type'));
+
+    }
+}, false);
+</script>
+
+    <div id="resultOne2" style="display:none">{{ a }}</div>
+    <div id="resultOne" style="display:none"></div>
+{#    <iframe src="{% url 'web_blank' %}" name="myframe" frameborder="0" width="80%" height="500"></iframe>#}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>发布问题</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/example/example1.css'%}">
+
+</head>
+<body>
+    <div id="top">
+        <div id="top1" ><a href="{% url 'web_exA' %}" style="color: white;text-decoration: none;"><</a></div>
+        <center id="top2">发布问题</center>
+    </div>
+       <center><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<form action="{% url 'web_question_insertEx' %}" method="post">
+    {% csrf_token %}
+    <input name="title" type="text" placeholder="主题" style="width: 250px;height: 40px;"><br/><br/>
+    <input type="text" name="content" placeholder="具体内容" style="width: 250px;height: 40px;"/><br/><br/>
+<button type="submit" id="btnLogin" style="width: 70px;height: 35px;">提交</button>
+</form>
+</center>
+
+
+
+
+</body>
+</html>
+

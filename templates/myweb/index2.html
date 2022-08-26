@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/index2.css'%}">
+</head>
+<body>
+	<div id="left">
+    <diV id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </diV>
+    <diV id="left2">
+    	<ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_carwler2' %}">提取信息</a></li>
+    	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_index' 1 %}">问答基地</a></li>
+            <li style="background-color: white;color: black;border-radius: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;热门讨论</li>
+    	    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_ex' %}">实例教程</a></li>
+
+    	</ul>
+    </diV>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'web_logout' %}">退出</a>
+    </div>
+
+	</div>
+
+    <div id="right">
+	<div id="right1">
+        <form action="{% url 'web_index' 1 %}" method="get">
+              <input id="searchBox" type="text" name="keyword" placeholder="主题/用户名">
+
+              <div id="right1_1">
+                <button id="subButton" type="submit"><img src="{% static 'myweb/img/搜索.png'%}"></button>
+              </div>
+        </form>
+	</div>
+	<div id="right2">
+
+	{% for vo in shoplist %}
+
+    <div class="pubQuestion">
+	<p>{{ vo.pub_user }}</p>
+	<p>#{{ vo.title }}</p>
+	<p style="width:700px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{ vo.content }}</p>
+	<p><a href="{% url 'web_detail' vo.id %}">查看回复</a></p>
+	</div>
+    {% endfor %}
+
+	</div>
+	</div>
+
+	<div id="person">
+		<div id="personTop">{{request.session.webuser.username}}</div>
+		<div id="personBody">
+			<p>邮箱：{{request.session.webuser.email}}</p>
+			<p>联系方式：{{request.session.webuser.phone}}</p>
+			<p>共发布：{{request.session.webuserAllPub}}</p>
+			<p>共回复：{{request.session.webuserAllAns}}</p>
+            <div style="background-color: rgb(14,109,253);margin-top: 20px;border-radius: 7px;">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;letter-spacing: 5px;" href="#">信息更新</a>
+    </div>
+		</div>
+	</div>
+</body>
+</html>

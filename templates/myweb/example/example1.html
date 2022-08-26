@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/example/example1.css'%}">
+
+	<script>
+        window.onload = function () {
+            var ul1 = document.getElementById('ul1').getElementsByTagName('li');
+            var ul2 = document.getElementById('ul2').getElementsByTagName('li');
+
+            for (var i = 0; i < ul1.length; i++) {
+                ul1[i].mod = i;
+                ul1[i].onclick = function () {
+	                document.getElementById("top2").innerText=ul1[this.mod].innerText;
+                    console.log(this.mod);
+                    //ul1[this.mod].style.color='white';
+                    for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                    }
+                    ul2[this.mod].style.display = 'block';
+                    for (var j = 0; j < ul1.length; j++) {
+                        ul1[j].style.color='grey'
+                    }
+                    ul1[this.mod].style.color= 'white'
+                }
+            }
+
+            main2_1.onclick = function () {
+                    // console.log(999);
+                    //实现当点击enter时主体内容进行变动显示
+                    for (var j = 0; j < ul2.length; j++) {
+                    	if(ul2[j].style.display=='block'){
+                    		mod2 = j;
+                    		console.log(mod2);
+                    		break;
+                    	}
+                    }
+                    if(mod2<7){
+                        for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                        }
+                        mod2=mod2+1;
+                        ul2[mod2].style.display = 'block';
+                    }
+                    else{
+                        //mod2=7
+                        //for (var j = 0; j < ul2.length; j++) {
+                        //ul2[j].style.display='none'
+                        //}
+                        //mod2=mod2+1;
+                        //ul2[mod2].style.display = 'block';
+                    }
+
+
+
+                    //实现当点击enter时标题内容进行变动显示
+                    document.getElementById("top2").innerText=ul1[mod2].innerText;
+
+                    //???实现不了——实现当点击enter时右侧内容进行的样式变动显示
+                    {#for (var j = 0; j < ul1.length; j++) {#}
+                    {#    ul2[j].style.display='none';#}
+                    {#    ul1[j].style.color='grey'#}
+                    //}
+                    //ul1[mod].style.color= 'white';
+                }
+
+            //本来想根据不同的isLogin值进行不同的处理，但实现不了，就换了一种实现方法
+     /*   var btn =document.getElementById("pub1") //获取元素
+        btn.onclick = function(){ //加上一个点击事件
+        if(isLogin|safe){
+            var answer = confirm("直接进行提问题") //把确认框赋值给answer
+            if(answer) //判断是否点击确定
+            window.location ='{% url 'web_login2' %}' //确定的话浏览器自身跳转
+        }else{
+            var answer2 = confirm("登录后才可进行提问,是否前往登录？") //把确认框赋值给answer
+            if(answer2) //判断是否点击确定
+            window.location ='{% url 'web_login2' %}' //确定的话浏览器自身跳转
+        }
+        }  */
+
+        }
+    </script>
+</head>
+<body>
+    <div id="top">
+        <div id="top1" ><a href="{% url 'judge5' %}" style="color: white;text-decoration: none;"><</a></div>
+        <center id="top2">一</center>
+    </div>
+    <div id="main">
+        <div id="main1">
+        <ul id="ul2">
+            <li style="display:block">
+            <p>
+            准备好python可以运行的环境<br/>
+            法一：<br/>
+            直接下载Python软件,下载网址：https://www.python.org/downloads/<br/>
+            法二：<br/>
+            下载Python编辑器，如PyCharm：https://www.jetbrains.com/pycharm/download/#section=windows<br/>
+            </p>
+            </li>
+
+            <li style="display:none">
+                <br/>
+                <a style="text-decoration: none;border:3px solid white; color: #0b97c4;" href="{% url 'web_ex1_down' %}">下载文件</a><br/>
+
+            	用下载好的Python软件或Pycharm运行下载的文件，即可获得https://movie.douban.com/top250
+            	此网站中关于“豆瓣电影Top250”的相关数据，并以txt文件格式进行保存。
+            </li>
+
+            <li style="display:none">
+            import requests<br/>
+            import re<br/>
+            import json<br/>
+            <hr/>
+                Python中有许多“库”，这些“库”中包含很多已经写好的方法，当我们在Python代码中引入这个库后便可以直接使用这些库中的方法。<br/>
+本节代码所用到的方法均出自上面导入的三个库“requests”、“re”、“json”。<br/>
+“requests”：用于向指定链接发送请求等。<br/>
+“re”：内含一些与正则表达式相关的处理数据的方法<br/>
+json库：内含一些与json相关的处理数据的方法<br/>
+
+            </li>
+
+            <li style="display:none">
+            if __name__ == "__main__":<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for i in range(1,26):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main(i)<br/>
+            <hr/>
+                Python在执行之前要将所有代码先编译成中间代码，Python程序运行时是从模块顶行开始，逐行进行翻译执行，所以，最顶层（没有被缩进）的代码都会被执行，而 “if __name__==’__main__:”就像是一个标志，告诉电脑，代码的入口在。<br/>
+因此虽然在此段代码中有很多没有被缩进的代码，但是不管顺序如何，Python在运行时会从“if __name__==’__main__:”开始进行执行。<br/>
+这段代码执行的内容是：<br/>
+①对1到26这16个数字进行遍历，每次读到的那个值存在i这个变量名中。<br/>
+②在遍历过程中，将读到的i值作为参数传给main这个自定义函数，让main函数分别执行。<br/>
+
+            </li>
+
+            <li style="display:none">
+            def main(page):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;url = 'http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-' + str(page)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;html = request_dandan(url)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;items = parse_result(html) # 解析过滤我们想要的信息<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for item in items:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write_item_to_file(item)<br/>
+            <hr/>
+
+
+                “def”开头的代码指的是我们自定义的函数，通过我们将一些会经常用到的代码进行封装，方便我们的使用。<br/>
+这段代码执行的内容是：<br/>
+①page即为上段代码中传过来的参数，<br/>
+②将单引号中的内容与传过来的参数page连接而成的整体作为字符串赋值给url这个变量名，其中str(page)的作用是将page这个数字转变为字符串。<br/>
+③将上一步赋值好的url作为参数传给request_dandan这个自定义函数，让其进行执行，并将执行后的结果赋值给html这个自定义的变量名。<br/>
+④将html作为参数传给parse_result这个自定义函数，让其进行执行，并将执行后的结果赋值给items这个自定义的变量名。<br/>
+⑤对items中的所有内容进行遍历，每次读到的那个值存在item这个变量名中。<br/>
+⑥在遍历过程中，将读到的item作为参数传给write_item_to_file这个自定义函数，让其函数分别执行。<br/>
+
+
+            </li>
+
+            <li style="display:none">
+            def request_dandan(url):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;try:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = requests.get(url)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if response.status_code == 200:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.text<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;except requests.RequestException:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br/>
+            <hr/>
+{#               <a href="{% url 'web_ex3_test' %}">运行</a>#}
+
+                这段代码执行的内容是：<br/>
+①首先代码整体上使用了try，except结构，此结构指的是先运行try内的代码，如果执行成功则忽略except后的内容，否则转去执行except后的内容。<br/>
+②将上段代码中传过来的参数作为requests.get()这个requests库中的函数的参数进行执行，得到服务器的响应，并将得到的内容赋值给response这个变量名。<br/>
+③进行判断：判断response内容中的status_code的值，如果值为200，说明已经成功获得请求，则返回response.text，即响应得到的网页源码内容。<br/>
+<br/>实践：<br/>
+                ①运行requests.get(url)，即对传过来的链接运行requests.get()函数，以传过来的第一个链接“http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-1”
+                为例，可以在输入框中输入这个网址点击运行可以看到运行的结果，（可以输入其它网址进行尝试）<br/>
+                <form action="{% url 'web_ex1_1' %}" method="post">
+                {% csrf_token %}
+                {#            这个属性是可以写到input标签中的        value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-1"#}
+                <input name="href" type="text" placeholder="输入网址" style="width: 500px;height: 35px;" >
+                <button type="submit"  style="width: 70px;height: 25px;">运行</button>
+                <br/>运行结果：<p>{{ a }}</p>
+                </form><br/>
+
+                ②运行response.status_code，可以在输入框中输入网址，点击运行可以看到对于该网址服务器返回的状态码<br/>
+                <form action="{% url 'web_ex1_2' %}" method="post">
+                {% csrf_token %}
+                {#            这个属性是可以写到input标签中的        value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-1"#}
+                <input name="href" type="text" placeholder="输入网址" style="width: 500px;height: 35px;" >
+                <button type="submit"  style="width: 70px;height: 25px;">运行</button>
+                <br/>运行结果：<p>{{ b }}</p>
+                </form><br/>
+
+                ③运行response.text，可以在输入框中输入网址，点击运行可以看到对于该网址服务器返回的text的值<br/>
+                <form action="{% url 'web_ex1_3' %}" method="post">
+                {% csrf_token %}
+                {#            这个属性是可以写到input标签中的        value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-1"#}
+                <input name="href" type="text" placeholder="输入网址" style="width: 500px;height: 35px;" >
+                <button type="submit"  style="width: 70px;height: 25px;">运行</button>
+                <br/>运行结果：<p>{{ c }}</p>
+                </form><br/>
+            </li>
+
+            <li style="display:none">
+            def parse_result(html):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;pattern = re.compile(<xmp>'<li>.*?list_num.*?(\d+).</div>.*?<img src="(.*?)".*?class="name".*?title="(.*?)">.*?class="star">.*?class="tuijian">(.*?)</span>.*?class="publisher_info">.*?target="_blank">(.*?)</a>.*?class="biaosheng">.*?<span>(.*?)</span></div>.*?<p><span\sclass="price_n">&yen;(.*?)</span>.*?</li>'</xmp>,re.S)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;items = re.findall(pattern,html)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for item in items:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield {<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'range': item[0],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'image': item[1],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'title': item[2],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'recommend': item[3],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'author': item[4],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'times': item[5],<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'price': item[6]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+            <hr/>
+    这段代码执行的内容是：<br/>
+①将得到的网页源码内容作为参数执行“parse_result”自定义函数。<br/>
+②用re.compile()优化双引号中的正则表达式，使其转化为对象，同时在re.compile()的阐述中使用了re.S,使得双引号中正则表达式中的点可以匹配换行符。，然后将这个对象赋值给pattern这个变量名。<br/>
+注：re.compile()是re库中的一个函数方法，使用的语法格式是re.compile()compile(pattern [,flags] )，“pattern”表示一个字符串形式的正则表达式，“flags”是一个可选填的表示匹配模式，这里使用的参数为“re.S”，意为使得“pattern”中的字符串中的点实现“点任意匹配模式”，即“pattern”中的字符串中的点可以代表换行符，可以对对需要匹配的文本整体进行匹配，而不用受到换行的限制。<br/>
+③re.compile()生成的是正则对象，单独使用没有任何意义，需要和findall(), search(), match(）搭配使用，如本段代码选择了re.findall()函数，表示对html中的文本内容按照pattern的匹配模式进行匹配，将匹配到的所有结果一个个按顺序存进一个列表中，将这个列表给items这个变量名。<br/>
+④在items中进行遍历，将每一次遍历到的值赋值给item，执行yield中的内容，相当于建立了一个字典。<br/>
+注：yield方法使得内存占用较小的情况下生成，关于怎么从这个对象中读数据可以参考后面的代码。<br/>
+
+            </li>
+
+{#    print('开始写入数据 ====> ' + str(item))<br/>#}
+            <li style="display:none">
+            def write_item_to_file(item):<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;with open('book.txt', 'a', encoding='UTF-8') as f:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.write(json.dumps(item, ensure_ascii=False) + '\n')<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.close()<br/>
+            <hr/>
+                前面说道对items中的所有内容进行遍历，每次读到的那个值存在item这个变量名中。，在遍历过程中，将读到的item作为参数传给write_item_to_file这个自定义函数，让其函数分别执行。<br/>
+这段代码执行的内容是：<br/>
+①with open() as f是文件层面的操作，第一个参数“book.txt”表示进行操作的文件的名称；“a”表示进行这样的操作——如果“book.txt”文件已存在，新的内容将会被写入到已有内容之后，如果该文件不存在，创建新文件进行写入；参数“encoding='UTF-8'”表示文件中的字符的编码类型为UTF-8（一种显示中文时常用的编码）。<br/>
+②“f.write”指对文件进行写操作；json.dumps()时json库中的一个方法，用于将python对象转换成json对象，即花括号 {} 包围键值对的形式，ensure_ascii=True：默认输出ASCLL码，如果把这个该成False,就可以输出中文；“\n”表示换行符，即每一次在文件中写好内容后加上一个换行符，使得下一次输入的内容从下一行开始。<br/>
+
+            </li>
+
+
+
+        </ul>
+        </div>
+        <div id="main2">
+        	<input id="main2_1" type="submit" value="继续 Enter">
+        </div>
+
+    </div>
+	<div id="right">
+		<ul id="ul1">
+           <!-- <li><h3>示例</h3></li> -->
+           <h3>示例</h3>
+           <li><h4>环境准备</h4></li>
+           <li><h4>文件下载</h4></li>
+           <!-- <li><h3>代码详解</h3></li> -->
+           <h3>代码详解</h3>
+           <li><h4>1、</h4></li>
+           <li><h4>2、</h4></li>
+           <li><h4>3、</h4></li>
+           <li><h4>4、</h4></li>
+           <li><h4>5、</h4></li>
+           <li><h4>6、</h4></li>
+{#           <li><h4>总结</h4></li>#}
+       </ul>
+	</div>
+       <div style="margin-right:60px;margin-top:20px;float: right;width: 200px; height: 50px;border-radius: 20px;background-color: rgb(85,83,96);border: none;color: white;font-size: 15px;" >
+        	<center><a style="line-height:50px;text-decoration: none;color: white; cursor: pointer;" id=pub1 href="{% url 'judge4' %}">{% if request.session.webuserIsLogin == 0 %}登录后提问{% else %}发布问题{% endif %}</a></center>
+        </div>
+
+</body>
+</html>
+

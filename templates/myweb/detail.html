@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/detail.css'%}">
+	<script>
+        window.onload = function () {
+            pub1.onclick = function () {
+                    pub2.style.display = 'block';
+                }
+        }
+    </script>
+</head>
+<body>
+	<div id="left">
+    <diV id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </diV>
+    <diV id="left2">
+    	<ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_carwler2' %}">提取信息</a></li>
+    	    <li style="background-color: white;color: black;border-radius: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_index' 1 %}">问答基地</a></li>
+    	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_hot' %}">热门讨论</a></li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_ex' %}">实例教程</a></li>
+    	</ul>
+    </diV>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'web_logout' %}">退出</a>
+    </div>
+
+	</div>
+
+    <div id="right">
+	<div id="right1">
+        <form action="{% url 'web_detail' pubID 1 %}" method="get">
+              <input id="searchBox" type="text" name="keyword" placeholder="用户名">
+
+              <div id="right1_1">
+                <button id="subButton" type="submit"><img src="{% static 'myweb/img/搜索.png'%}"></button>
+              </div>
+        </form>
+	</div>
+
+	<div id="right2">
+
+	<div class="pubQuestion">
+    <p>{{ question.pub_user }}</p>
+	<p>#{{ question.title }}</p>
+	<p>{{ question.content }}</p>
+
+    <p><a id="pub1" style="text-decoration: underline">进行回复</a></p><br/>
+	<div id="pub2" style="display:none">
+
+        <form action="{% url 'web_question_insertAns' pubID %}" method="post">
+{#            对于多行文本比较合适的输入框大小  style="height: 200px;width: 400px;" #}
+                {% csrf_token %}<input name="ans" type="text" placeholder="输入内容"  style="height: 50px;width: 300px;">
+                <button type="submit" >提交</button>
+                </form>
+
+	</div>
+	</div>
+
+ {% for vo in shoplist %}
+	<div class="ansQuestion">
+	<p>{{ vo.ans_user }}</p>
+	<p>{{ vo.content }}</p>
+	</div>
+ {% endfor %}
+<div id="page" style="clear: both;">
+    <center>
+      <a href="{% url 'web_detail' pubID pIndex|add:-1 %}?{{ mywhere|join:'&' }}">&laquo;</a>
+        {% for p in plist %}
+      <a {% if p == pIndex %}style="color:rgb(14,109,253);font-weight: 600" {% endif %} href="{% url 'web_detail' pubID p %}?{{mywhere|join:'&'}}">{{p}}</a>
+        {% endfor %}
+     <a href="{% url 'web_detail' pubID pIndex|add:1 %}?{{ mywhere|join:'&' }}">&raquo;</a>
+</center>
+    </div>
+	</div>
+	</div>
+
+	<div id="person">
+		<div id="personTop">{{request.session.webuser.username}}</div>
+		<div id="personBody">
+			<p>邮箱：{{request.session.webuser.email}}</p>
+			<p>联系方式：{{request.session.webuser.phone}}</p>
+			<p>共发布：{{request.session.webuserAllPub}}</p>
+			<p>共回复：{{request.session.webuserAllAns}}</p>
+		</div>
+	</div>
+</body>
+</html>

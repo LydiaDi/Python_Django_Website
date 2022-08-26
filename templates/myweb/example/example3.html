@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/example/example1.css' %}">
+    <script src="{% static 'myweb/js/echarts.js' %}"></script>
+	<script>
+        window.onload = function () {
+            var ul1 = document.getElementById('ul1').getElementsByTagName('li');
+            var ul2 = document.getElementById('ul2').getElementsByTagName('li');
+
+            for (var i = 0; i < ul1.length; i++) {
+                ul1[i].mod = i;
+                ul1[i].onclick = function () {
+	                document.getElementById("top2").innerText=ul1[this.mod].innerText;
+                    console.log(this.mod);
+                    //ul1[this.mod].style.color='white';
+                    for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                    }
+                    ul2[this.mod].style.display = 'block';
+                    for (var j = 0; j < ul1.length; j++) {
+                        ul1[j].style.color='grey'
+                    }
+                    ul1[this.mod].style.color= 'white'
+                }
+            }
+
+            main2_1.onclick = function () {
+                    // console.log(999);
+                    //实现当点击enter时主体内容进行变动显示
+                    for (var j = 0; j < ul2.length; j++) {
+                    	if(ul2[j].style.display=='block'){
+                    		mod2 = j;
+                    		console.log(mod2);
+                    		break;
+                    	}
+                    }
+                    if(mod2<7){
+                        for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                        }
+                        mod2=mod2+1;
+                        ul2[mod2].style.display = 'block';
+                    }
+                    else{
+                        //mod2=7
+                        //for (var j = 0; j < ul2.length; j++) {
+                        //ul2[j].style.display='none'
+                        //}
+                        //mod2=mod2+1;
+                        //ul2[mod2].style.display = 'block';
+                    }
+
+
+
+                    //实现当点击enter时标题内容进行变动显示
+                    document.getElementById("top2").innerText=ul1[mod2].innerText;
+
+                    //???实现不了——实现当点击enter时右侧内容进行的样式变动显示
+                    {#for (var j = 0; j < ul1.length; j++) {#}
+                    {#    ul2[j].style.display='none';#}
+                    {#    ul1[j].style.color='grey'#}
+                    //}
+                    //ul1[mod].style.color= 'white';
+                }
+        }
+    </script>
+</head>
+<body>
+    <div id="top">
+        <div id="top1" ><a href="{% url 'judge5' %}" style="color: white;text-decoration: none;"><</a></div>
+        <center id="top2">三</center>
+    </div>
+    <div id="main">
+        <div id="main1">
+        <ul id="ul2">
+
+            <li style="display:block">
+            <p>
+            &nbsp;&nbsp;ECharts是一款开源、功能强大的数据可视化产品，是一个纯JavaScript图表库，即所有与图表相关的设置均是在JavaScript中进行设置。<br/>
+            “https://echarts.apache.org/examples/zh/index.html”此链接可直接访问ECharts，查看其中所拥有的各类图表。<br/>
+            “https://echarts.apache.org/handbook/zh/get-started/”此网站是官方介绍的“快速上手”模块，即下载echarts.js文件并引入本地html文件中后，复制相应示例中的Javascript代码
+                就可实现在自定义位置绘制自定义大小的图片&nbsp;&nbsp;<a style="text-decoration: none;border:3px solid white; color: #0b97c4;" href="{% url 'web_ex3_down' %}">下载echarts.js文件</a> <br/>
+            &nbsp;&nbsp;当然，对于诸如地理坐标等复杂图像还需引入除echarts.js文件之外的相应的js文件。<br/>
+            </p>
+            </li>
+
+            <li style="display:none">
+            <a style="text-decoration: none;border:3px solid white; color: #0b97c4;" href="{% url 'web_ex3_down2' %}">下载柱形图html文件</a>&nbsp;&nbsp;将此文件与echarts.js文件并列放在同一个文件夹下，
+                用浏览器打开html文件便可以实现如下图所示的效果，在本地复现ECharts柱形示例图。<br/>
+                当然，通过修改html中的数据，可以实现相应的统计结果；通过修改其中的一些配置项，可以实现不同的展示效果，具体的配置项内容可以查看官方的配置项手册“https://echarts.apache.org/zh/option.html#title”
+            <hr/>
+
+                <div style="height: 400px;width: 400px;" id="tu"> </div>
+
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('tu'),"dark");
+
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+          data: ['销量']
+        },
+        xAxis: {
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '销量',
+            type: 'bar',
+            data: [100, 20, 36, 10, 10, 20]
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+            </li>
+
+            <li style="display:none">
+            <a style="text-decoration: none;border:3px solid white; color: #0b97c4;" href="{% url 'web_ex3_down' %}">下载压缩包</a><br/>
+            说明：<br/>
+            如果已经根据教程二在数据库中建立了details表，那么只需对照<br/>
+                ①“ECharts链接MySQL数据”文件夹下settings.py文件中DATABASES 中的参数<br/>
+                ②“ECharts链接MySQL数据”文件夹下views.py文件中def get_conn()函数中的参数<br/>
+                将相应的参数修改为与本地数据库相同的配置后，用Pycharm运行即可看到基于当前数据库中的数据筛选出的Top5新增确诊的城市及数量，如下图所示。<br/><br/>
+                如果需要链接MySQL数据库中的其他表，显示其它的数据，那么需要进行如下操作<br/>
+                ①修改“ECharts链接MySQL数据”文件夹下settings.py文件中DATABASES 中的参数<br/>
+                ②修改“ECharts链接MySQL数据”文件夹下views.py文件中def get_conn()函数中的参数<br/>
+                ③修改“ECharts链接MySQL数据”文件夹下views.py文件中def index(request)函数中sql参数（SQL语句，查询出柱形图的横坐标与纵坐标值）<br/>
+                如果还需要以其它表显示，而不是柱形图，那么需要进行如下操作<br/>
+                继上述第③步，修改def index(request)函数中的所有内容，按照自己的需求将需要传给html进行显示统计的数据以键值对的形式存至context中<br/>
+                ④在“templates”文件夹下仿照“Top5新增.html”新建html文件，注意引入echarts.js文件的格式，在script标签复制对应图形的官方代码<br/>
+                ⑤将script标签中具体的数据，即"data:"后的数据替换为“{{ xxx|safe }}”格式，其中xxx填写成views文件中context中相应的键值<br/>
+
+
+            <hr/>
+
+                <div style="height: 450px;width: 450px;" id="tu2"> </div>
+
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart2 = echarts.init(document.getElementById('tu2'),"dark");
+
+      // 指定图表的配置项和数据
+      var option2 = {
+        title: {
+          text: '新增确诊数Top5'
+        },
+        tooltip: {},
+        legend: {
+          data: ['数量']
+        },
+        xAxis: {
+          data: {{ city|safe }}
+          {#data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']#}
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '数量',
+            type: 'bar',
+            {#data: [100, 20, 36, 10, 10, 20]#}
+            data: {{ confirm|safe }}
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart2.setOption(option2);
+    </script>
+{#                <script type="text/javascript">#}
+{#                    function getData2(){#}
+{#                        $.ajax({#}
+{#                            url:"/ex3",#}
+{#                            success:function (data){#}
+{#                                option2.xAxis.data=data.city;#}
+{#                                option2.series[0].data=data.confirm;#}
+{#                                option2.setOption(option2);#}
+{#                            }#}
+{#                        })#}
+{#                    }#}
+{#                </script>#}
+            </li>
+
+
+
+
+
+        </ul>
+        </div>
+        <div id="main2">
+        	<input id="main2_1" type="submit" value="继续 Enter">
+        </div>
+
+    </div>
+	<div id="right">
+		<ul id="ul1">
+           <!-- <li><h3>示例</h3></li> -->
+           <h3>示例</h3>
+            <li><h4>ECharts简介</h4></li>
+           <li><h4>示例图像复现</h4></li>
+           <li><h4>链接MySQL数据</h4></li>
+           <!-- <li><h3>代码详解</h3></li> -->
+{#           <h3>代码详解</h3>#}
+{#           <li><h4>1、</h4></li>#}
+{#           <li><h4>2、</h4></li>#}
+{#           <li><h4>3、</h4></li>#}
+{#           <li><h4>4、</h4></li>#}
+{#           <li><h4>5、</h4></li>#}
+{#           <li><h4>6、</h4></li>#}
+{#           <li><h4>总结</h4></li>#}
+       </ul>
+	</div>
+<div style="margin-right:60px;margin-top:20px;float: right;width: 200px; height: 50px;border-radius: 20px;background-color: rgb(85,83,96);border: none;color: white;font-size: 15px;" >
+        	<center><a style="line-height:50px;text-decoration: none;color: white; cursor: pointer;" id=pub1 href="{% url 'judge4' %}">{% if request.session.webuserIsLogin == 0 %}登录后提问{% else %}发布问题{% endif %}</a></center>
+        </div>
+</body>
+</html>
+

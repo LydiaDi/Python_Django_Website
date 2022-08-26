@@ -1,0 +1,208 @@
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Extrabold.eott');
+	src: local('Gilroy Extrabold'), local('Gilroy-Extrabold'),
+		url('Gilroy-Extrabold.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Extrabold.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Extrabold.ttff') format('truetype');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-UltraLightItalic.eott');
+	src: local('Gilroy UltraLight Italic'), local('Gilroy-UltraLightItalic'),
+		url('Gilroy-UltraLightItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-UltraLightItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-UltraLightItalic.ttff') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url('Gilroy-BoldItalic.eot');
+	src: local('Gilroy Bold Italic'), local('Gilroy-BoldItalic'),
+		url('Gilroy-BoldItalic.eot?#iefix') format('embedded-opentype'),
+		url('Gilroy-BoldItalic.woff') format('woff'),
+		url('Gilroy-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Semibold.eott');
+	src: local('Gilroy Semibold'), local('Gilroy-Semibold'),
+		url('Gilroy-Semibold.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Semibold.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Semibold.ttff') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url('Gilroy-BlackItalic.eot');
+	src: local('Gilroy Black Italic'), local('Gilroy-BlackItalic'),
+		url('Gilroy-BlackItalic.eot?#iefix') format('embedded-opentype'),
+		url('Gilroy-BlackItalic.woff') format('woff'),
+		url('Gilroy-BlackItalic.ttf') format('truetype');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-ThinItalic.eott');
+	src: local('Gilroy Thin Italic'), local('Gilroy-ThinItalic'),
+		url('Gilroy-ThinItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-ThinItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-ThinItalic.ttff') format('truetype');
+	font-weight: 100;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-ExtraboldItalic.eott');
+	src: local('Gilroy Extrabold Italic'), local('Gilroy-ExtraboldItalic'),
+		url('Gilroy-ExtraboldItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-ExtraboldItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-ExtraboldItalic.ttff') format('truetype');
+	font-weight: 800;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url('Gilroy-Black.eot');
+	src: local('Gilroy Black'), local('Gilroy-Black'),
+		url('Gilroy-Black.eot?#iefix') format('embedded-opentype'),
+		url('Gilroy-Black.woff') format('woff'),
+		url('Gilroy-Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-HeavyItalic.eott');
+	src: local('Gilroy Heavy Italic'), local('Gilroy-HeavyItalic'),
+		url('Gilroy-HeavyItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-HeavyItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-HeavyItalic.ttff') format('truetype');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Regular.eott');
+	src: local('Gilroy Regular'), local('Gilroy-Regular'),
+		url('Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Regular.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Regular.ttff') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-SemiboldItalic.eott');
+	src: local('Gilroy Semibold Italic'), local('Gilroy-SemiboldItalic'),
+		url('Gilroy-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-SemiboldItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-SemiboldItalic.ttff') format('truetype');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Medium.eott');
+	src: local('Gilroy Medium'), local('Gilroy-Medium'),
+		url('Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Medium.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Medium.ttff') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url('Gilroy-Bold.eot');
+	src: local('Gilroy Bold'), local('Gilroy-Bold'),
+		url('Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
+		url('Gilroy-Bold.woff') format('woff'),
+		url('Gilroy-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-RegularItalic.eott');
+	src: local('Gilroy Regular Italic'), local('Gilroy-RegularItalic'),
+		url('Gilroy-RegularItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-RegularItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-RegularItalic.ttff') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Light.eott');
+	src: local('Gilroy Light'), local('Gilroy-Light'),
+		url('Gilroy-Light.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Light.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Light.ttff') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-LightItalic.eott');
+	src: local('Gilroy Light Italic'), local('Gilroy-LightItalic'),
+		url('Gilroy-LightItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-LightItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-LightItalic.ttff') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Heavy.eott');
+	src: local('Gilroy Heavy'), local('Gilroy-Heavy'),
+		url('Gilroy-Heavy.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Heavy.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Heavy.ttff') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-MediumItalic.eott');
+	src: local('Gilroy Medium Italic'), local('Gilroy-MediumItalic'),
+		url('Gilroy-MediumItalic.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-MediumItalic.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-MediumItalic.ttff') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Thin.eott');
+	src: local('Gilroy Thin'), local('Gilroy-Thin'),
+		url('Gilroy-Thin.eot?#iefix') format('embedded-opentype'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Thin.wofff') format('woff'),
+		url(https://askbootstrap.com/preview/vogel/css/fonts/gilroy/Gilroy-Thin.ttff') format('truetype');
+	font-weight: 100;
+	font-style: normal;
+}

@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/example/example1.css'%}">
+	<script>
+        window.onload = function () {
+            var ul1 = document.getElementById('ul1').getElementsByTagName('li');
+            var ul2 = document.getElementById('ul2').getElementsByTagName('li');
+
+            for (var i = 0; i < ul1.length; i++) {
+                ul1[i].mod = i;
+                ul1[i].onclick = function () {
+	                document.getElementById("top2").innerText=ul1[this.mod].innerText;
+                    console.log(this.mod);
+                    //ul1[this.mod].style.color='white';
+                    for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                    }
+                    ul2[this.mod].style.display = 'block';
+                    for (var j = 0; j < ul1.length; j++) {
+                        ul1[j].style.color='grey'
+                    }
+                    ul1[this.mod].style.color= 'white'
+                }
+            }
+
+            main2_1.onclick = function () {
+                    // console.log(999);
+                    //实现当点击enter时主体内容进行变动显示
+                    for (var j = 0; j < ul2.length; j++) {
+                    	if(ul2[j].style.display=='block'){
+                    		mod2 = j;
+                    		console.log(mod2);
+                    		break;
+                    	}
+                    }
+                    if(mod2<7){
+                        for (var j = 0; j < ul2.length; j++) {
+                        ul2[j].style.display='none'
+                        }
+                        mod2=mod2+1;
+                        ul2[mod2].style.display = 'block';
+                    }
+                    else{
+                        //mod2=7
+                        //for (var j = 0; j < ul2.length; j++) {
+                        //ul2[j].style.display='none'
+                        //}
+                        //mod2=mod2+1;
+                        //ul2[mod2].style.display = 'block';
+                    }
+
+
+
+                    //实现当点击enter时标题内容进行变动显示
+                    document.getElementById("top2").innerText=ul1[mod2].innerText;
+
+                    //???实现不了——实现当点击enter时右侧内容进行的样式变动显示
+                    {#for (var j = 0; j < ul1.length; j++) {#}
+                    {#    ul2[j].style.display='none';#}
+                    {#    ul1[j].style.color='grey'#}
+                    //}
+                    //ul1[mod].style.color= 'white';
+                }
+        }
+    </script>
+</head>
+<body>
+    <div id="top">
+        <div id="top1" ><a href="{% url 'judge5' %}" style="color: white;text-decoration: none;"><</a></div>
+        <center id="top2">二</center>
+    </div>
+    <div id="main">
+        <div id="main1">
+        <ul id="ul2">
+            <li style="display:block">
+            <p>
+            1、准备好python可以运行的环境<br/>
+            法一：<br/>
+            直接下载Python软件,下载网址：https://www.python.org/downloads/<br/>
+            法二：<br/>
+            下载Python编辑器，如PyCharm：https://www.jetbrains.com/pycharm/download/#section=windows<br/>
+            2、准备好数据存储的MySQL数据库<br/>
+            第一步：<br/>
+            直接下载社区版本的MySQL,下载网址：https://dev.mysql.com/downloads/mysql/<br/>
+            第二步：<br/>
+            下载MySQL图形化管理界面Navicat，下载网址：https://www.navicat.com.cn/download/navicat-for-mysql<br/>
+
+            </p>
+            </li>
+
+            <li style="display:none">
+                <br/>
+                <a style="text-decoration: none;border:3px solid white; color: #0b97c4;" href="{% url 'web_ex2_down' %}">下载文件</a><br/>
+                文件运行前准备——在Navicat中建立MySQL数据库及数据表用来存储数据：<br/>
+            本例中是在密码为“123456”的本地连接"localhost"中新建了名为"corona"的数据库，并在该数据下建立了名为“details”的数据表，如果您的数据与此不同，只需相应修改get_conn()
+                中的参数即可<br/><br/>
+
+运行方法：<br/>
+            	用下载好的Python软件或Pycharm运行下载的文件，即可解析https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5
+            	中关于中国每个城市“累计确诊人数”、“新增确诊人数”、“治愈总人数”、“死亡总人数”的数据。
+                <hr/>
+                注：“https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5”此网址的由来是通过访问腾讯疫情实时查询网站“https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5”
+                后点击F12键，在开发者模式中通过在“网络”模块刷新网页，查找返回数据的网站而发现。
+            </li>
+
+            <li style="display:none">
+            import requests<br/>
+import pymysql<br/>
+import time<br/>
+import json<br/>
+import traceback<br/>
+            <hr/>
+                Python中有许多“库”，这些“库”中包含很多已经写好的方法，当我们在Python代码中引入这个库后便可以直接使用这些库中的方法。<br/>
+本节代码所用到的方法均出自上面导入的三个库“requests”、“pymysql”、“json”、“time”、“traceback”。<br/>
+requests库：用于向指定链接发送请求等。<br/>
+json库：内含一些与json相关的处理数据的方法<br/>
+pymysql库：内含对mysql数据库进行操作的一些方法<br/>
+                time库：内含与时间相关的一些方法，如time.asctime()会以一个可读的形式返回当前的时间<br/>
+                traceback库：用于追踪异常，当代码执行出现失误时及时返回异常信息
+
+
+            </li>
+
+            <li style="display:none">
+            if __name__ == "__main__":<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;update_details()<br/>
+            <hr/>
+                Python在执行之前要将所有代码先编译成中间代码，Python程序运行时是从模块顶行开始，逐行进行翻译执行，所以，最顶层（没有被缩进）的代码都会被执行，而 “if __name__==’__main__:”就像是一个标志，告诉电脑，代码的入口在。<br/>
+因此虽然在此段代码中有很多没有被缩进的代码，但是不管顺序如何，Python在运行时会从“if __name__==’__main__:”开始进行执行。<br/>
+这段代码执行指明此文件应当首先执行update_details()这一自定义函数<br/>
+
+            </li>
+
+            <li style="display:none">
+            def update_details():<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;conn=None<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;cursor=None<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;try:<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li=get_tencent_data()<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conn,cursor=get_conn()<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sql="insert into details(update_time,province,city,confirm,confirm_add,heal,dead) values (%s,%s,%s,%s,%s,%s,%s)"<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sql_query="select %s=(select update_time from details order by id desc limit 1)" #对于当前最大时间戳<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(sql_query,li[0][0])  #为什么这里填li[0][0]正确，而填写li[0]就错误呢？我感觉应该写li[0]？<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if not cursor.fetchone()[0]:  <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{time.asctime()}开始更新最新数据")<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for item in li:<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(sql,item)  #这一句中逗号后面具体写什么，要看便历的item所对应的数据是什么数据类型，<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conn.commit()<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{time.asctime()}更新最新数据完毕")<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{time.asctime()}已是最新数据")<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except:<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;traceback.print_exc()<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finally:<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;close_conn(conn,cursor)<br/>
+            <hr/>
+
+
+                “def”开头的代码指的是我们自定义的函数，通过我们将一些会经常用到的代码进行封装，方便我们的使用。<br/>
+                这段代码的执行目：取出get_tencent_data()这一函数中提取出来的规则化的数据，将数据存到数据库的相应字段中<br/>
+这段代码执行的具体内容是：<br/>
+①给自定义变量名conn及cursor赋值为None空值<br/>
+②代码整体上使用了try，except结构，此结构指的是先运行try内的代码，如果执行成功则忽略except后的内容，否则转去执行except后的内容，给出报错信息。<br/>
+③自定义变量名sql中存储的字符串，如果将字符串中的%s替换为具体的值就可以在数据库中执行的SQL语句，即向数据库中插入数据。这里%s指的是占位符，使得之后在执行此语句是可以用变量进行替换，从而实现向数据库插入不同的数据<br/>
+④将“select update_time from details order by id desc limit 1”指的是在数据库details表中找出最新的update_time值，sql_query中整体的SQL语句指的是查询占位符%s是否与最新的update_time值相等<br/>
+⑤cursor.execute()指的是执行SQL语句，第一个参数是具体的SQL语句，第二个参数给出占位符%s具体的值li[0][0],即在网页中提取出来的当前最新数据的时间。<br/>
+⑥cursor.fetchone()指的是将执行的SQL语句的结果以元组的形式返回，故如果执行“if not cursor.fetchone()[0]”后的语句说明在数据库中没有找到与当前网页中最新数据相同的时间字段，即需要向数据库中更新数据<br/>
+⑦time.asctime()指以一个可读的形式返回当前的时间，“print(f"{time.asctime()}开始更新最新数据")”这一语句是在执行的控制台中输出提示语句，如“Sat Mar 20 12:35:27 2022开始更新最新数据”<br/>
+⑧遍历li中的数据，对于每一个便历的值执行数据库插入语句，因为被遍历的单个值是元组的形式，故cursor.execute()第二个参数直接写item即可，如果被便历值是字典形式，那么第二个参数应为
+ 键值对的形式，如cursor.execute(sql, [item["range"],item["image"],item["title"],item["recommend"],item["author"],item["times"],item["price"]]) 。<br/>
+⑨继⑥，如果cursor.fetchone()[0]返回了数据，说明数据库中已经有了最新的数据，故无需执行数据库插入语句，执行else语句分支，给出相应提示即可。<br/>
+                <center><a  href="{% url 'web_ex2_1' %}" style="width: 140px;padding-left:20px;padding-right:20px;padding-top:2px;padding-bottom:2px;height: 29px;color: black;background-color: white;text-decoration: none;">运行</a>运行后可看到最新数据</center><br/>
+                <table class="table table-hover">
+                    <tr>
+                    <th>ID</th>
+                    <th>更新时间</th>
+                    <th>省份</th>
+                    <th>城市</th>
+                    <th>累计确诊</th>
+                    <th>新增确诊</th>
+                        <th>累计治愈</th>
+                        <th>累计死亡</th>
+                    </tr>
+                    {% for vo in list %}
+                    <tr>
+                    <td>{{ vo.id }}</td>
+                    <td>{{ vo.update_time }}</td>
+                    <td>{{ vo.province }}</td>
+                    <td>{{ vo.city }}</td>
+                    <td>{{ vo.confirm_add }}</td>
+                    <td>{{ vo.confirm }}</td>
+                    <td>{{ vo.heal }}</td>
+                    <td>{{ vo.dead }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </li>
+
+            <li style="display:none">
+            def get_tencent_data():<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;url = "https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5"<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;r = requests.get(url)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;res = json.loads(r.text)  # json字符串转字典<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;data_all = json.loads(res['data'])<br/><br/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;details = []  # 当日详细数据<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;update_time = data_all["lastUpdateTime"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;data_country = data_all["areaTree"]  # list 25个国家<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;data_province = data_country[0]["children"]  # 中国各省<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;for pro_infos in data_province:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;province = pro_infos["name"]  # 省名<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for city_infos in pro_infos["children"]:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;city = city_infos["name"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirm = city_infos["total"]["confirm"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirm_add = city_infos["today"]["confirm"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heal = city_infos["total"]["heal"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dead = city_infos["total"]["dead"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;details.append([update_time, province, city, confirm, confirm_add, heal, dead])<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;return details<br/>
+            <hr/>
+{#               <a href="{% url 'web_ex3_test' %}">运行</a>#}
+这段代码的执行目：将链接"https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5"的内容去处，对其中的数据进行处理，使其成为规格化的数据，方便进行后续操作。<br/>
+                这段代码执行的内容是：<br/>
+①获取"https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5"中的内容，并将获取的内容赋值给自定义变量名r<br/>
+②可以在下面的第一个实践中输入网址，可以看到返回的r.text是一个json类型的字符串，json.loads(r.text)可以实现将json类型数据转变为字典类型，即键值对的类型。<br/>
+③由于经过上述语句执行得到的res中国“data”键所对应的数据仍然属于json类型的数据，故经过分析，欲得到我们需要的数据，还需对res中的data再次调用json.loads()函数<br/>
+                ③对得到的data_all数据内容进行遍历解析后可以得到每个城市的相关数据，且数据是以元组的形式存储，运行实践②的内容可以看到details存储的数据内容<br/>
+<br/>实践：<br/>
+
+                ①可以在输入框中输入网址，点击运行可以看到对于该网址服务器返回的text的值<br/>
+                <form action="{% url 'web_ex2_2' %}" method="post">
+                {% csrf_token %}
+                {#            这个属性是可以写到input标签中的        value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-1"#}
+                <input name="href" type="text" placeholder="输入网址" style="width: 500px;height: 35px;" >
+                <button type="submit"  style="width: 70px;height: 25px;">运行</button>
+                <br/>运行结果：<div style="height: 200px;width: 80%;overflow-y: scroll;">{{ a }}</div>
+                <br/>json.loads(r.text)结果：<div style="height: 200px;width: 80%;overflow-y: scroll;">{{ b }}</div>
+                <br/>json.loads(res['data'])结果：<div style="height: 200px;width: 80%;overflow-y: scroll;">{{ c }}</div>
+                </form><br/>
+
+                ②点击查看，可以看到最终返回的details这一数据具体内容<br/>
+                <form action="{% url 'web_ex2_3' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"  style="width: 70px;height: 25px;">查看</button>
+                <br/>运行结果：<p>{{ d }}</p>
+                </form><br/>
+            </li>
+
+            <li style="display:none">
+            def get_conn():<br/>
+                #创建连接<br/>
+                conn=pymysql.connect(host="localhost",<br/>
+                              user="root",<br/>
+                              password="123456",<br/>
+                              db="corona")<br/>
+                #创建游标<br/>
+                cursor=conn.cursor()#执行完毕返回的结果集默认以元组显示<br/>
+                return conn,cursor<br/><br/>
+
+            def close_conn(conn,cursor):<br/>
+                if cursor:<br/>
+                    cursor.close()<br/>
+                if conn:<br/>
+                    conn.close()<br/>
+            <hr/>
+    这两段代码是封装好的关于数据库连接与断开的方法，代码执行的内容是：<br/>
+①get_conn()是封装好的与数据库连接相关的方法，pymysql.connect中的参数应根据自己数据库中的相关设置进行更改即可。<br/>
+②conn.cursor()中包含了与数据库操作相关的方法，如在前述update_details()代码中用到了执行数据库操作的cursor.execute()方法、接收返回值的cursor.fetchone()方法。<br/>
+③close_conn()是封装好的与数据库断开连接相关的方法。<br/>
+
+            </li>
+
+
+
+
+        </ul>
+        </div>
+        <div id="main2">
+        	<input id="main2_1" type="submit" value="继续 Enter">
+        </div>
+
+    </div>
+	<div id="right">
+		<ul id="ul1">
+           <!-- <li><h3>示例</h3></li> -->
+           <h3>示例</h3>
+           <li><h4>环境准备</h4></li>
+           <li><h4>文件下载</h4></li>
+           <!-- <li><h3>代码详解</h3></li> -->
+           <h3>代码详解</h3>
+           <li><h4>1、</h4></li>
+           <li><h4>2、</h4></li>
+           <li><h4>3、</h4></li>
+           <li><h4>4、</h4></li>
+           <li><h4>5、</h4></li>
+{#           <li><h4>总结</h4></li>#}
+       </ul>
+	</div>
+<div style="margin-right:60px;margin-top:20px;float: right;width: 200px; height: 50px;border-radius: 20px;background-color: rgb(85,83,96);border: none;color: white;font-size: 15px;" >
+        	<center><a style="line-height:50px;text-decoration: none;color: white; cursor: pointer;" id=pub1 href="{% url 'judge4' %}">{% if request.session.webuserIsLogin == 0 %}登录后提问{% else %}发布问题{% endif %}</a></center>
+        </div>
+</body>
+</html>
+

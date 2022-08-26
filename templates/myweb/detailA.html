@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/detailA.css'%}">
+{#	<script>#}
+{#        window.onload = function () {#}
+{#            pub1.onclick = function () {#}
+{#                    pub2.style.display = 'block';#}
+{#                }#}
+{#        }#}
+{#    </script>#}
+    <script>
+        window.onload = function(){ //设置当页面加载时执行
+        var btn =document.getElementById("pub1") //获取元素
+        btn.onclick = function(){ //加上一个点击事件
+        var answer = confirm("登录后才可进行回复,是否前往登录？") //把确认框赋值给answer
+        if(answer) //判断是否点击确定
+        window.location ='{% url 'web_login2' %}' //确定的话游览器自身跳转
+        }}
+    </script>
+
+{#    <script type="text/javascript">#}
+{#        function toPub(var){#}
+{#            var r=confirm("Press a button!");#}
+{#            if (r==true){#}
+{#              window.location.href='http://test/?param='+var;#}
+{#            }#}
+{#            else{#}
+{#              alert("You pressed Cancel!");#}
+{#            }#}
+{#        }#}
+{#    </script>#}
+</head>
+<body>
+{#<script type="text/javascript">#}
+{#	function doPub(url){#}
+{#    Modal.confirm({#}
+{#        msg: "登录后才可进行回复！",#}
+{#        title: ' 信息提示',#}
+{#        btnok: '登录',#}
+{#        btncl:'取消'#}
+{#      }).on(function (e){#}
+{#        if(e){#}
+{#          window.location.href=url;#}
+{#          //Modal.alert({msg: "成功",title: ' 信息提示',btnok: '确定',btncl:'取消'});#}
+{#        }#}
+{#      });#}
+{#  }#}
+{#</script>#}
+
+	<div id="left">
+    <diV id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </diV>
+    <diV id="left2">
+    	<ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_carwler' %}">提取信息</a></li>
+    	    <li style="background-color: white;color: black;border-radius: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'indexA' 1 %}">问答基地</a></li>
+    	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_hotA' %}">热门讨论</a></li>
+    	    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_exA' %}">实例教程</a></li>
+    	</ul>
+    </diV>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'web_login2' %}">登录/注册</a>
+    </div>
+
+	</div>
+
+    <div id="right">
+	<div id="right1">
+        <form action="{% url 'web_detailA' pubID 1 %}" method="get">
+              <input id="searchBox" type="text" name="keyword" placeholder="用户名">
+
+              <div id="right1_1">
+                <button id="subButton" type="submit"><img src="{% static 'myweb/img/搜索.png'%}"></button>
+              </div>
+        </form>
+	</div>
+
+	<div id="right2">
+
+	<div class="pubQuestion">
+    <p>{{ question.pub_user }}</p>
+	<p>#{{ question.title }}</p>
+	<p>{{ question.content }}</p>
+    <p><a id="pub1" style="text-decoration: underline" >进行回复</a></p><br/>
+{#        <p><button onclick="doPub('{% url 'web_login2' %}')" style="text-decoration: underline;color: #0b93d5;font-size: 13px;letter-spacing: 1px;cursor: pointer;border:none;margin-left: -20px;background-color: white">进行回复</button></p><br/>#}
+	<div id="pub2" style="display:none">
+	<textarea></textarea>
+	<button>提交</button>
+	</div>
+	</div>
+
+ {% for vo in shoplist %}
+	<div class="ansQuestion">
+	<p>{{ vo.ans_user }}</p>
+	<p>{{ vo.content }}</p>
+	</div>
+ {% endfor %}
+<div id="page" style="clear: both;">
+    <center>
+      <a href="{% url 'web_detailA' pubID pIndex|add:-1 %}?{{ mywhere|join:'&' }}">&laquo;</a>
+        {% for p in plist %}
+      <a {% if p == pIndex %}style="color:rgb(14,109,253);font-weight: 600" {% endif %} href="{% url 'web_detailA' pubID p %}?{{mywhere|join:'&'}}">{{p}}</a>
+        {% endfor %}
+     <a href="{% url 'web_detailA' pubID pIndex|add:1 %}?{{ mywhere|join:'&' }}">&raquo;</a>
+</center>
+    </div>
+	</div>
+	</div>
+
+{#	<div id="person">#}
+{#		<div id="personTop">{{request.session.webuser.username}}</div>#}
+{#		<div id="personBody">#}
+{#			<p>邮箱：{{request.session.webuser.email}}</p>#}
+{#			<p>联系方式：{{request.session.webuser.phone}}</p>#}
+{#			<p>共发布：{{request.session.webuserAllPub}}</p>#}
+{#			<p>共回复：{{request.session.webuserAllAns}}</p>#}
+{#		</div>#}
+{#	</div>#}
+
+</body>
+</html>

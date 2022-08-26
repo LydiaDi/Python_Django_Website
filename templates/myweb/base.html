@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/index.css'%}">
+<script>
+        function panduan(){ //设置当页面加载时执行
+        var answer = confirm("登录后才可进行提问,是否前往登录？") //把确认框赋值给answer
+        if(answer) //判断是否点击确定
+        window.location ='{% url 'web_login2' %}' //确定的话浏览器自身跳转
+        }
+    </script>
+    {% block addScripts %}
+    {% endblock %}
+</head>
+<body>
+	<div id="left">
+    <div id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </div>
+    <diV id="left2">
+    	<ul>
+            <li style="background-color: white;color: black;border-radius: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提取信息</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'indexA' 1 %}">问答基地</a></li>
+    	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_hotA' %}">热门讨论</a></li>
+    	    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_exA' %}">实例教程</a></li>
+    	</ul>
+    </diV>
+        <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" onclick="panduan()">发布问题</a>
+    </div>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'web_login2' %}">登录/注册</a>
+    </div>
+
+
+	</div>
+
+    <div id="right" style="width: 70%;margin-top: -100px;">
+	{% block addForm %}
+    {% endblock %}
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/index2.css'%}">
+</head>
+<body>
+	<div id="left">
+    <diV id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </diV>
+    <diV id="left2">
+    	<ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_carwler' %}">提取信息</a></li>
+{# 这里的judge1啥意思，我是给忘了   	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'judge1' %}">问答基地</a></li>#}
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'indexA' 1 %}">问答基地</a></li>
+    	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_hotA' %}">热门讨论</a></li>
+{#            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'judge2' %}">热门讨论</a></li>#}
+    	    <li style="background-color: white;color: black;border-radius: 12px;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实例教程</li>
+    	</ul>
+    </diV>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'judge3' %}">{% if request.session.webuserIsLogin == 0 %}登录/注册{% else %}退出{% endif %}</a>
+    </div>
+
+	</div>
+
+    <div id="right">
+	<div id="right1">
+        <form action="{% url 'web_index' 1 %}" method="get">
+              <input id="searchBox" type="text" name="keyword" placeholder="主题/用户名">
+
+              <div id="right1_1">
+                <button id="subButton" type="submit"><img src="{% static 'myweb/img/搜索.png'%}"></button>
+              </div>
+        </form>
+	</div>
+	<div id="right2">
+
+
+
+    <div class="pubQuestion">
+    <a href="{% url 'web_ex1' %}">实例1：爬取当当网 Top 500 本五星好评书籍</a>
+	</div>
+{##}
+{#    <div class="pubQuestion" style="padding-top: 20px;">#}
+{#    <a>实例2：爬取豆瓣最受欢迎的250部电影</a>#}
+{#	</div>#}
+
+    <div class="pubQuestion" style="padding-top: 20px;">
+    <a href="{% url 'web_ex2' %}">实例2：爬取腾讯疫情数据并存进mysql数据库</a>
+	</div>
+
+    <div class="pubQuestion" style="padding-top: 20px;">
+    <a href="{% url 'web_ex3' %}">实例3：将mysql数据库中的数据进行可视化显示</a>
+	</div>
+
+
+	</div>
+	</div>
+
+{#	<div id="person">#}
+{#		<div id="personTop">{{request.session.webuser.username}}</div>#}
+{#		<div id="personBody">#}
+{#			<p>邮箱：{{request.session.webuser.email}}</p>#}
+{#			<p>联系方式：{{request.session.webuser.phone}}</p>#}
+{#			<p>共发布：{{request.session.webuserAllPub}}</p>#}
+{#			<p>共回复：{{request.session.webuserAllAns}}</p>#}
+{#		</div>#}
+{#	</div>#}
+</body>
+</html>

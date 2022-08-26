@@ -1,0 +1,11 @@
+{% extends "myweb/base2.html" %}
+{% block addForm %}
+    <center><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<form action="{% url 'web_question_insert' %}" method="post">
+    {% csrf_token %}
+    <input name="title" type="text" placeholder="主题" style="width: 250px;height: 40px;"><br/><br/>
+    <input type="text" name="content" placeholder="具体内容" style="width: 250px;height: 40px;"/><br/><br/>
+<button type="submit" id="btnLogin" style="width: 70px;height: 35px;">提交</button>
+</form>
+</center>
+{% endblock %}

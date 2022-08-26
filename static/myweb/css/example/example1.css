@@ -1,0 +1,87 @@
+*{
+	
+	margin: 0;
+	padding: 0;
+}
+body{
+
+	background-color: rgb(66,64,72);
+}
+#top{
+	height: 60px;
+	width: 100%;
+	background-color: rgb(85,83,96);
+	color:white;
+    text-align: center;
+    line-height: 60px;
+}
+#top1{
+    float: left;
+    font-size: 60px;
+    cursor: pointer;
+    margin-left: 40px;
+}
+#top2{/*
+    float: left;
+    background-color: red;
+    width: 160px;*/
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+#main{
+	width: 80%;
+	height: 70%;
+	/*background-color:grey;*/
+	float: left;
+}
+#main1{
+	width: 80%;
+	height: 400px;
+	overflow-y: scroll;
+	/*background-color:red;*/
+	margin-left: 120px;
+	margin-top: 40px;
+	float: left;
+	color: white;
+}
+#main2{
+	width: 400px;
+	margin: 0 auto;
+}
+#main2_1{
+	height:50px;
+	width: 400px;
+	border-radius: 25px;
+	margin-top:8px; 
+	background-color: rgb(85,83,96);
+	border: none;
+	color: white;
+	font-size: 15px;
+	cursor: pointer;
+}
+#right{
+	width: 20%;
+	height: 100%;
+	padding-top:20px; 
+	padding-bottom: 20px;
+	overflow-y: scroll;
+	background-color:red;
+	/*background-color: rgb(37,36,41);*/
+	background-color: rgb(54,52,61);
+	float: right;
+}
+ul{
+	list-style-type:none;
+}
+#ul1 h3{
+	color:grey;
+	margin-top: 7px;
+	margin-left: 15px;
+}
+#ul1 li{
+	color:grey;
+	margin-top: 7px;
+	margin-left: 29px;
+	cursor: pointer;
+
+}

@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/index.css'%}">
+</head>
+<body>
+	<div id="left">
+    <diV id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </diV>
+    <diV id="left2">
+    	<ul>
+             <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_carwler2' %}">提取信息</a></li>
+            <li style="background-color: white;color: black;border-radius: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问答基地</li>
+            <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_hot' %}">热门讨论</a></li>
+    	    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_ex' %}">实例教程</a></li>
+
+
+    	</ul>
+    </diV>
+        <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" id=pub1 href="{% url 'web_question_add' %}">发布问题</a>
+    </div>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'web_logout' %}">退出</a>
+    </div>
+
+	</div>
+
+    <div id="right">
+	<div id="right1">
+        <form action="{% url 'web_index' 1 %}" method="get">
+              <input id="searchBox" type="text" name="keyword" placeholder="主题/用户名">
+
+              <div id="right1_1">
+                <button id="subButton" type="submit"><img src="{% static 'myweb/img/搜索.png'%}"></button>
+              </div>
+        </form>
+	</div>
+	<div id="right2">
+
+    {% for vo in shoplist %}
+
+{#	<div class="pubQuestion">#}
+{#	<p>小迪</p>#}
+{#	<p>#主题</p>#}
+{#	<p style="width:700px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">主体内容：2015年3月20日，国际足联正式确认，2022年卡塔尔世界杯将于当年11月份开幕，最终的决赛将在12月18日进行，这一天也适逢卡塔尔国庆节。此外，由于欧洲主流联赛届时激战正酣，国际足联缩短了2022世界杯的赛程，从原来的32天减至28天。2015年9月25日，国际足联确定了2022年卡塔尔世界杯的举办时间，比赛首次放在北半球的冬天举行，时间从11月21日到12月18日，持续28天。#}
+{#2018年7月13日，国际足联主席因凡蒂诺在FIFA官方新闻发布会中表示，2022年卡塔尔世界杯将于北半球冬季举行，举办时间为11月21日到12月18日。#}
+{#2020年7月15日晚，2022卡塔尔世界杯赛程公布。揭幕战将在2022年11月21日打响，决赛将于当地时间12月18日晚18时在可容纳80,000人的卢塞尔体育场进行。小组赛阶段，每天将有四场比赛进行，确保球队拥有最佳赛程间歇时间 [1]  。2022年卡塔尔世界杯洲际附加赛对阵抽签仪式于当地时间2021年11月26日在位于瑞士苏黎世的国际足联总部进行 [40]  。根据抽签结果，亚足联球队将与南美足联球队、中北美及加勒比海地区足联球队将与大洋洲足联球队分别以单场决胜的方式决定最后两个2022年卡塔尔世界杯决赛阶段参赛资格。两场洲际附加赛分别定于2022年6月13日和14日进行。</p>#}
+{#	<p><a>查看回复</a></p>#}
+{#	</div>#}
+    <div class="pubQuestion">
+	<p>{{ vo.pub_user }}</p>
+	<p>#{{ vo.title }}</p>
+	<p style="width:700px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{ vo.content }}</p>
+	<p><a href="{% url 'web_detail' vo.id %}">查看回复</a></p>
+	</div>
+    {% endfor %}
+    <div id="page">
+    <center>
+      <a href="{% url 'web_index' pIndex|add:-1 %}?{{ mywhere|join:'&' }}">&laquo;</a>
+        {% for p in plist %}
+      <a {% if p == pIndex %}style="color:rgb(14,109,253);font-weight: 600" {% endif %} href="{% url 'web_index' p %}?{{mywhere|join:'&'}}">{{p}}</a>
+        {% endfor %}
+     <a href="{% url 'web_index' pIndex|add:1 %}?{{ mywhere|join:'&' }}">&raquo;</a>
+</center>
+    </div>
+
+	</div>
+	</div>
+
+	<div id="person">
+		<div id="personTop">{{request.session.webuser.username}}</div>
+		<div id="personBody">
+			<p>邮箱：{{request.session.webuser.email}}</p>
+			<p>联系方式：{{request.session.webuser.phone}}</p>
+			<p>共发布：{{request.session.webuserAllPub}}</p>
+			<p>共回复：{{request.session.webuserAllAns}}</p>
+            <div style="background-color: rgb(14,109,253);margin-top: 20px;border-radius: 7px;">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;letter-spacing: 5px;" href="#">信息更新</a>
+    </div>
+		</div>
+	</div>
+</body>
+</html>

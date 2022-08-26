@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'myweb/css/index.css'%}">
+
+    {% block addScripts %}
+    {% endblock %}
+</head>
+<body>
+	<div id="left">
+    <div id="left1">
+    	<img src="{% static 'myweb/img/logo.png'%}">
+    </div>
+    <diV id="left2">
+    	<ul>
+            <li style="background-color: white;color: black;border-radius: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_carwler2' %}">提取信息</a></li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_index' 1 %}">问答基地</a></li>
+    	    <li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_hot' %}">热门讨论</a></li>
+    	    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="{% url 'web_ex' %}">实例教程</a></li>
+    	</ul>
+    </diV>
+        <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" id=pub1 href="{% url 'web_question_add' %}">发布问题</a>
+    </div>
+    <div id="left3">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;color: white; cursor: pointer;" href="{% url 'web_logout' %}">退出</a>
+    </div>
+
+
+	</div>
+
+    <div id="right" style="width: 70%;margin-top: -100px;">
+	{% block addForm %}
+    {% endblock %}
+	</div>
+
+
+</body>
+</html>
